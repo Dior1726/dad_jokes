@@ -1,32 +1,48 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      dark
+    >
+      <v-toolbar-title>Dad Jokes</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn :to="{name: 'Home'}" class="mr-5" exact>
+        Home
+      </v-btn>
+
+      <v-btn :to="{name: 'Favourite'}">
+        Favourite Jokes
+      </v-btn>
+    </v-app-bar>
+
+    <v-main >
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapActions } from 'vuex';
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'App',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  data: () => ({
+    //
+  }),
+  mounted() {
+    this.get_jokes()
+  },
+  methods: {
+    ...mapActions(['get_jokes'])
   }
+};
+</script>
+
+<style lang="scss">
+main {
+  background-color: rgb(66, 92, 90);
 }
 </style>
